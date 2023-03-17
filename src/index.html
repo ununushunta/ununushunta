@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        /* 他のCSSコード */
+
+        /* ロゴのスタイル */
+        .logo {
+          /* 他のCSSコード */
+          pointer-events: auto; /* クリックイベントを有効化 */
+        }
+
+        /* 他のCSSコード */
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas"></canvas>
+    <!-- ロゴを追加 -->
+    <img src="https://i.imgur.com/35s9jER.png" alt="Your Logo" class="logo" id="reset-logo">
+    <!-- SNSアイコンを追加 -->
+    <div class="social-icons">
+        <a href="https://twitter.com/ununushunta" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.instagram.com/ununushunta" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+    </div>
+    <script>
+        // 他のJavaScriptコード
+
+        // ロゴがクリックされたときに画面をリセットする
+        document.getElementById('reset-logo').addEventListener('click', () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            x = canvas.width / 2;
+            y = canvas.height / 2;
+            drawUnunN(x, y); // 「n」を中央に描画
+        });
+
+        // 他のJavaScriptコード
+    </script>
+</body>
+</html>
