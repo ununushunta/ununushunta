@@ -1,6 +1,6 @@
 The MIT License (MIT)
 
-Copyright (c) 2023 ununu  (https://codepen.io/ununushunta/pen/yLxEpMN)
+Copyright (c) 2023 ununu  (https://codepen.io/ununushunta/pen/XWxeqjj)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
