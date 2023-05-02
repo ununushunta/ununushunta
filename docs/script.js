@@ -26,7 +26,6 @@ function moveCharacter(deltaX, deltaY) {
   posX += deltaX;
   posY += deltaY;
 
-  // 画面の端を超えないようにする
   posX = Math.max(Math.min(posX, canvas.width - fontSize / 2), fontSize / 2);
   posY = Math.max(Math.min(posY, canvas.height - fontSize / 2), fontSize / 2);
 
@@ -34,36 +33,19 @@ function moveCharacter(deltaX, deltaY) {
   drawCharacter(posX, posY, 'u');
 }
 
-function handleDeviceOrientation(event) {
-  const beta = event.beta / 90; // -1（下）〜1（上）
-  const gamma = event.gamma / 90; // -1（左）〜1（右）
+function randomMove() {
+  const directions = [
+    [0, -stepSize * 20], // Up
+    [0, stepSize * 20], // Down
+    [-stepSize * 20, 0], // Left
+    [stepSize * 20, 0], // Right
+  ];
 
-  moveCharacter(gamma * stepSize * 20, beta * stepSize * 20);
-}
-
-function handleKeyboardMove(e) {
-  switch (e.code) {
-    case 'ArrowUp':
-      moveCharacter(0, -stepSize * 20);
-      break;
-    case 'ArrowDown':
-      moveCharacter(0, stepSize * 20);
-      break;
-    case 'ArrowLeft':
-      moveCharacter(-stepSize * 20, 0);
-      break;
-    case 'ArrowRight':
-      moveCharacter(stepSize * 20, 0);
-      break;
-    default:
-      return;
-  }
+  const randomDirection = directions[Math.floor(Math.random() * directions.length)];
+  moveCharacter(randomDirection[0], randomDirection[1]);
 }
 
 drawCharacter(posX, posY, 'u');
 
-// DeviceOrientationEventのイベントリスナー
-window.addEventListener('deviceorientation', handleDeviceOrientation);
-
-// キーボード操作のイベントリスナー
-document.addEventListener('keydown', handleKeyboardMove);
+// 自動で文字を移動させる
+setInterval(randomMove, 100);
