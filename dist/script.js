@@ -19,18 +19,25 @@ function drawCharacter(x, y, character) {
 }
 
 function moveCharacter(deltaX, deltaY) {
-  ctx.clearRect(posX - fontSize / 2, posY - fontSize / 2, fontSize, fontSize);
-
-  drawCharacter(posX, posY, trail);
+  const prevPosX = posX;
+  const prevPosY = posY;
 
   posX += deltaX;
   posY += deltaY;
 
+  // 画面の端を超えないようにする
   posX = Math.max(Math.min(posX, canvas.width - fontSize / 2), fontSize / 2);
   posY = Math.max(Math.min(posY, canvas.height - fontSize / 2), fontSize / 2);
 
-  trail = trail === 'n' ? 'u' : 'n';
-  drawCharacter(posX, posY, 'u');
+  const currentCharacter = trail === 'n' ? 'u' : 'n';
+  
+  // 現在の文字とtrailが同じ場合にのみ、過去の位置に文字を描画
+  if (currentCharacter === trail) {
+    drawCharacter(prevPosX, prevPosY, trail);
+  }
+
+  trail = currentCharacter;
+  drawCharacter(posX, posY, currentCharacter);
 }
 
 function randomMove() {
@@ -49,3 +56,22 @@ drawCharacter(posX, posY, 'u');
 
 // 自動で文字を移動させる
 setInterval(randomMove, 100);
+
+function drawCharacter(x, y, character) {
+  ctx.fillStyle = 'white';
+  ctx.font = `${fontSize}px Arial`;
+
+  // アウターグローの設定
+  ctx.shadowBlur = 5; // グローの広がり
+  ctx.shadowColor = 'white'; // グローの色
+  ctx.shadowOffsetX = 0; // 横方向のオフセット
+  ctx.shadowOffsetY = 0; // 縦方向のオフセット
+
+  ctx.fillText(character, x - fontSize / 2, y + fontSize / 2);
+
+  // アウターグローの設定をリセット
+  ctx.shadowBlur = 0;
+  ctx.shadowColor = 'transparent';
+  ctx.shadowOffsetX = 0;
+  ctx.shadowOffsetY = 0;
+}
